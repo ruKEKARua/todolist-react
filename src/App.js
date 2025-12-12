@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './styles/App.css';
+
+import { TodoList } from './components/TodoList';
+import { Inputs } from './components/Inputs';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    
+    const localStorageArray = []
+    
+    Object.keys(localStorage).forEach((element) => {
+
+        const titleAndBodySplit = localStorage[element].split(',')
+        
+        localStorageArray.push({id: element, title: titleAndBodySplit[0], body: titleAndBodySplit[1]});
+
+    });
+
+    const [tasks, setTasks] = useState(localStorageArray)
+    
+    const createNewTask = (newTask) => {
+        
+        setTasks([...tasks, newTask])
+
+        localStorage.setItem(newTask.id, [newTask.title, newTask.body])
+        
+    }
+
+    const removeTask = (task) => {
+
+        
+        setTasks(tasks.filter(p => p.id !== task.id))
+        localStorage.removeItem(task.id)
+
+    }
+
+    return (
+        <div className="App">
+    
+            <header><h1>TodoList</h1></header>
+
+            <main>
+
+                <Inputs createNewTask={createNewTask}/>
+
+                <TodoList taskList={tasks} removeTask={removeTask}/>
+
+
+            </main>
+
+        </div>
+    );
 }
 
 export default App;
