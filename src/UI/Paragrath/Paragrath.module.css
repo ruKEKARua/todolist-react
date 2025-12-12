@@ -10,3 +10,22 @@
     text-align: justify;
 
 }
+
+.requiredValue {
+
+    position: relative;
+    bottom: 50px;
+    left: 250px;
+
+    width: 150px;
+    height: 0px;
+
+    color: #ff0d0d9c;
+
+}
+
+.hidden {
+
+    opacity: 0;
+
+}

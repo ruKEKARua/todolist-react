@@ -4,9 +4,9 @@ export const Paragrath = ({className, title}) =>{
 
     return (
         
-        <div>
+        <div className={className}>
 
-            <p className={className}>{title}</p>
+            <p>{title}</p>
 
         </div>
 
