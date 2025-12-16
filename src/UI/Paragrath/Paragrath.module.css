@@ -1,6 +1,8 @@
-.title {
+.title, .body {
 
     text-align: center;
+
+    font-size: clamp(1rem, 2rem, 3rem);
 
 }
 
@@ -13,12 +15,10 @@
 
 .requiredValue {
 
-    position: relative;
-    bottom: 50px;
-    left: 250px;
-
     width: 150px;
     height: 0px;
+
+    margin: 0 auto;
 
     color: #ff0d0d9c;
 
@@ -26,6 +26,13 @@
 
 .hidden {
 
-    opacity: 0;
+    display: none;
+
+}
+
+.empty {
+
+    font-size: 50px;
+    text-align: center;
 
 }

@@ -4,6 +4,9 @@ import { Button } from '../UI/Buttons/Buttons'
 import { Paragrath } from '../UI/Paragrath/Paragrath'
 import buttonStyle from '../UI/Buttons/Buttons.module.css'
 import paragrathStyle from '../UI/Paragrath/Paragrath.module.css'
+import inputsStyle from '../UI/Inputs/Input.module.css'
+import { Textarea } from '../UI/Textareas/Textarea'
+import textareaStyle from '../UI/Textareas/Textarea.module.css'
 
 
 export const Inputs = ({createNewTask}) =>{
@@ -70,23 +73,25 @@ export const Inputs = ({createNewTask}) =>{
 
             <h2>Add New Task</h2>
 
-            <div>
+            <div className='input_block'>
 
                 <Input 
                     value={todo.title} 
                     name={'Title'} 
                     onChange={event => {setTodo({...todo, title: event.target.value}); toogleClass('changeTitleWhileInput')}}
+                    className={inputsStyle.InputTitle}
                 />
                 <Paragrath className={`${paragrathStyle.requiredValue} ${titleIsActive ? '' : paragrathStyle.hidden}`} title={'Это поле обязательно'}/>
 
             </div>
            
 
-            <div>
-                <Input 
+            <div className='input_block'>
+                <Textarea 
                     value={todo.body} 
                     name={'Description'} 
                     onChange={event => {setTodo({...todo, body: event.target.value}); toogleClass('changeBodyWhileInput')}}
+                    className={`${inputsStyle.InputBody} ${textareaStyle.body}`}
                 />
                 <Paragrath className={`${paragrathStyle.requiredValue} ${bodyIsActive ? '' : paragrathStyle.hidden}`} title={'Это поле обязательно'}/>
             </div>

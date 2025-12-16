@@ -1,0 +1,5 @@
+.body {
+
+    font-size: clamp(15px, 25px, 40px);
+
+}

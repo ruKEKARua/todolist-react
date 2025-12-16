@@ -1,10 +1,18 @@
-.Inputs {
+.InputTitle, .InputBody {
 
     text-align: center;
-    height: 30px;
+
+    width:  clamp(15vw, 20vw, 50vw);
+    height: clamp(10px, 35px, 70px);
 
     margin: 10px 0;
     background-color: #f3ffb5;
-    border-radius: 10px;
+    border-radius: 25px;
+
+}
+
+.InputBody {
+
+    height: clamp(10px, 60px, 70px);
 
 }

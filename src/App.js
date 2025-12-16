@@ -3,6 +3,9 @@ import './styles/App.css';
 
 import { TodoList } from './components/TodoList';
 import { Inputs } from './components/Inputs';
+import { Paragrath } from './UI/Paragrath/Paragrath';
+
+import paragrathStyle from '../src/UI/Paragrath/Paragrath.module.css'
 
 function App() {
 
@@ -44,7 +47,8 @@ function App() {
 
                 <Inputs createNewTask={createNewTask}/>
 
-                <TodoList taskList={tasks} removeTask={removeTask}/>
+                {localStorageArray.length == 0 ? <Paragrath title={'List is Empty'} className={paragrathStyle.empty} /> : <TodoList taskList={tasks} removeTask={removeTask}/>}
+
 
 
             </main>

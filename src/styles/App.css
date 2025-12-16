@@ -46,7 +46,7 @@ main {
     justify-content: center;
     gap: 20px;
 
-    width: 1350px;
+    width: clamp(10vw, 35vw, 50vw);
     height: 100%;
 
     margin: 20px auto 0 auto;
@@ -59,7 +59,7 @@ main {
     justify-content: center;
     flex-direction: column;
 
-    width: 300px;
+    width: clamp(15vw, 20vw, 50vw);
     text-align: center;
 
     margin: 0 auto;
@@ -70,8 +70,8 @@ main {
 
     display: inline-block;
 
-    width: 500px;
-    max-height: 150px;
+    width: 100%;
+    height: 150px;
 
     overflow: scroll;
     overflow-x: hidden;
@@ -88,5 +88,12 @@ main {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     
+
+}
+
+.input_block {
+
+    width: clamp(15vw, 20vw, 50vw);
+    height: 100px;
 
 }

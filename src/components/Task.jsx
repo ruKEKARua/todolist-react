@@ -17,9 +17,9 @@ export const Task = ({title, body, task, removeTask}) =>{
         
         <div className='task'>
 
+            <Button title={'Delete'} className={buttonStyle.ButtonDelete} func={deleteTask}/>
             <Paragrath title={title} className={paragrathStyle.title}/>
             <Paragrath title={body} className={paragrathStyle.body}/>
-            <Button title={'Delete'} className={buttonStyle.ButtonDelete} func={deleteTask}/>
 
         </div>
 
