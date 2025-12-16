@@ -3,7 +3,7 @@
     width: clamp(50px, 100px, 150px);
     height: 50px;
 
-    margin: 0 auto;
+    margin: 50px auto;
 
     background-color: #ffb500b0;
     border-radius: 20px;

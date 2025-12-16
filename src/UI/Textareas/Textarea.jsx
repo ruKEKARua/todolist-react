@@ -1,10 +1,10 @@
 import React from 'react'
 
-export const Textarea = ({className, title}) =>{
+export const Textarea = ({className, value, ...props}) =>{
 
     return (
         
-        <textarea className={className}>{title}</textarea>
+        <textarea className={className} value={value} {...props}/>
 
     )
 

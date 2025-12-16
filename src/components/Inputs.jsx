@@ -71,8 +71,6 @@ export const Inputs = ({createNewTask}) =>{
         
         <form className='inputs'>
 
-            <h2>Add New Task</h2>
-
             <div className='input_block'>
 
                 <Input 
@@ -89,7 +87,6 @@ export const Inputs = ({createNewTask}) =>{
             <div className='input_block'>
                 <Textarea 
                     value={todo.body} 
-                    name={'Description'} 
                     onChange={event => {setTodo({...todo, body: event.target.value}); toogleClass('changeBodyWhileInput')}}
                     className={`${inputsStyle.InputBody} ${textareaStyle.body}`}
                 />

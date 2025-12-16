@@ -45,6 +45,8 @@ function App() {
 
             <main>
 
+                <h2>Add New Task</h2>
+
                 <Inputs createNewTask={createNewTask}/>
 
                 {localStorageArray.length == 0 ? <Paragrath title={'List is Empty'} className={paragrathStyle.empty} /> : <TodoList taskList={tasks} removeTask={removeTask}/>}
