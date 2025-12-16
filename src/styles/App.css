@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Open-Sans';
+    src: url('/src/UI/Font/Open_Sans/static/OpenSans-Regular.ttf');
+}
+
 body {
 
     margin: 0;
@@ -6,6 +11,8 @@ body {
     background-color: #000000d4;
 
     color: white;
+
+    font-family: 'Open-sans';
 
 }
 
@@ -60,6 +67,7 @@ main {
     flex-direction: column;
 
     width: clamp(15vw, 20vw, 50vw);
+    height: 350px;
     text-align: center;
 
     margin: 0 auto;
@@ -83,7 +91,7 @@ main {
 
     background-color: #4e5ab294;
 
-    border: 3px solid #39af23;
+    border: 3px solid #5c5e7a;
     border-right: none;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -94,6 +102,6 @@ main {
 .input_block {
 
     width: clamp(15vw, 20vw, 50vw);
-    height: 100px;
+    height: 200px;
 
 }

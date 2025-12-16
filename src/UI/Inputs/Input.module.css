@@ -13,6 +13,6 @@
 
 .InputBody {
 
-    height: clamp(10px, 60px, 70px);
+    height: clamp(50px, 130px, 170px);
 
 }
