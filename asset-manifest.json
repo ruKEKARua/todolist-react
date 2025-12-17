@@ -1,14 +1,16 @@
 {
   "files": {
-    "main.css": "/todolist-react/static/css/main.cae596d2.css",
-    "main.js": "/todolist-react/static/js/main.8b07e822.js",
+    "main.css": "/todolist-react/static/css/main.30856a1f.css",
+    "main.js": "/todolist-react/static/js/main.600c5212.js",
+    "static/media/sun.png": "/todolist-react/static/media/sun.3c38fdf09c708465ae4f.png",
     "static/media/OpenSans-Regular.ttf": "/todolist-react/static/media/OpenSans-Regular.b5742f857779c0562634.ttf",
+    "static/media/moon.svg": "/todolist-react/static/media/moon.3c6d889a8914f58b5181.svg",
     "index.html": "/todolist-react/index.html",
-    "main.cae596d2.css.map": "/todolist-react/static/css/main.cae596d2.css.map",
-    "main.8b07e822.js.map": "/todolist-react/static/js/main.8b07e822.js.map"
+    "main.30856a1f.css.map": "/todolist-react/static/css/main.30856a1f.css.map",
+    "main.600c5212.js.map": "/todolist-react/static/js/main.600c5212.js.map"
   },
   "entrypoints": [
-    "static/css/main.cae596d2.css",
-    "static/js/main.8b07e822.js"
+    "static/css/main.30856a1f.css",
+    "static/js/main.600c5212.js"
   ]
 }
