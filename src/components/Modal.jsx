@@ -1,20 +1,29 @@
 import React from 'react'
-import { Paragrath } from '../UI/Paragrath/Paragrath'
-import { Button } from '../UI/Buttons/Buttons'
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations'
+import { Inputs } from './Inputs';
+import { Button } from '../UI/Buttons/Buttons';
 
-import paragrathStyle from '../UI/Paragrath/Paragrath.module.css'
 import buttonStyle from '../UI/Buttons/Buttons.module.css'
 
-export const Modal = () =>{
+export const Modal = ({createNewTask, className, closeModal}) =>{
+
+    const Fade = styled.div`animation: 0.25s ${keyframes`${fadeIn}`}`;
 
     return (
         
-        <div>
+        <Fade>
 
-            
+            <div className={className}>
+                
+                <Inputs createNewTask={createNewTask} closeModal={closeModal}/>
 
-        </div>
+                <Button func={closeModal} title={'X'} className={buttonStyle.closeModal}/>
 
+            </div>  
+
+        </Fade>
+        
     )
 
 }

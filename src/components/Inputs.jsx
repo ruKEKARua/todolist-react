@@ -9,7 +9,7 @@ import { Textarea } from '../UI/Textareas/Textarea'
 import textareaStyle from '../UI/Textareas/Textarea.module.css'
 
 
-export const Inputs = ({createNewTask}) =>{
+export const Inputs = ({createNewTask, closeModal}) =>{
 
     const [todo, setTodo] = useState({title: '', body: ''});
     
@@ -62,8 +62,9 @@ export const Inputs = ({createNewTask}) =>{
         }
 
         const newTask = {...todo, id: Date.now()};
-        createNewTask(newTask)
-        setTodo({title: '', body: ''})
+        createNewTask(newTask);
+        setTodo({title: '', body: ''});
+        closeModal();
 
     }
 

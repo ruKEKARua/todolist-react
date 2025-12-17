@@ -1,3 +1,55 @@
+.ButtonNewTask {
+
+    width: 245px;
+    height: 30px;
+
+    background-color: rgb(255 167 2 / 69%);
+    border: none;
+
+    cursor: pointer;
+
+    margin: 0 auto;
+
+}
+.ButtonNewTask:hover {
+
+    background-color: rgba(255, 166, 2, 0.966);
+
+}
+
+.closeModal {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: clamp(30px, 2vw, 100px);
+    height: clamp(30px, 2vw, 100px);
+
+    font-size: clamp(20px, 1.6vw, 100px);
+    text-align: center;
+    color: rgb(255, 255, 255);
+
+    background-color: #c04b4bbe;
+    border-radius: 100%;
+    border: none;
+
+    cursor: pointer;
+
+    margin: 0 auto;
+
+    position: absolute;
+    top: 15%;
+    right: clamp(10vw, 25vw, 25vw);
+
+}
+.closeModal:hover {
+
+    background-color: #c04b4b;
+
+}
+
+
 .ButtonAdd {
     
     width: clamp(50px, 100px, 150px);
@@ -6,27 +58,20 @@
     margin: 50px auto;
 
     background-color: #ffb500b0;
-    border-radius: 20px;
     border: none;
-    color: white;
-
-    transition: 0.24s;
 
 }
 
 .ButtonAdd:hover {
 
     background-color: #ffb500;
-    transition: 0.24s;
-
+    
 }
 
 .ButtonDelete {
 
     background-color: #ff60609c;
-    color: white;
-    border-radius: 10px;
-    transition: 0.24s;
+    
     border: 3px solid #74769b;
 
 }
@@ -34,6 +79,15 @@
 .ButtonDelete:hover {
 
     background-color: #ff6060;
+    
+
+}
+
+.ButtonDelete, .ButtonDelete:hover, .ButtonAdd, .ButtonAdd:hover, .ButtonNewTask, .ButtonNewTask:hover, .closeModal, .closeModal:hover {
+
     transition: 0.24s;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
 
 }

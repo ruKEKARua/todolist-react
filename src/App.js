@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import './styles/App.css';
 
 import { TodoList } from './components/TodoList';
-import { Inputs } from './components/Inputs';
+import { Modal } from './components/Modal';
 import { Paragrath } from './UI/Paragrath/Paragrath';
+import { Button } from './UI/Buttons/Buttons';
 
 import paragrathStyle from '../src/UI/Paragrath/Paragrath.module.css'
+import buttonStyle from '../src/UI/Buttons/Buttons.module.css'
 
 function App() {
-
     
     const localStorageArray = []
     
@@ -22,7 +23,9 @@ function App() {
 
     });
 
-    const [tasks, setTasks] = useState(localStorageArray)
+    const [tasks, setTasks] = useState(localStorageArray);
+
+    const [isModalHidden, setModalHidden] = useState(false);
     
 
     const createNewTask = (newTask) => {
@@ -41,6 +44,18 @@ function App() {
 
     }
 
+    const modalOpen = () => {
+
+        setModalHidden(!isModalHidden);
+
+    }
+
+    const closeModal = () => {
+
+        setModalHidden(!isModalHidden);
+
+    }
+
     return (
         <div className="App">
     
@@ -48,11 +63,11 @@ function App() {
 
             <main>
 
-                <h2>Add New Task</h2>
+                <Button title={'Add New Task'} className={buttonStyle.ButtonNewTask} func={modalOpen}/>
 
-                <Inputs createNewTask={createNewTask}/>
+                <Modal createNewTask={createNewTask} className={`${'modal'} ${isModalHidden ? '' : 'hidden'}`} closeModal={closeModal}/>
 
-                {localStorageArray.length == 0 ? <Paragrath title={'List is Empty'} className={paragrathStyle.empty} /> : <TodoList taskList={tasks} removeTask={removeTask}/>}
+                {localStorageArray.length == 0 ? <Paragrath title={'List is Empty'} className={paragrathStyle.empty} /> : <TodoList taskList={tasks} removeTask={removeTask} />}
 
 
 
