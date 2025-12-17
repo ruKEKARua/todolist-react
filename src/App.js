@@ -8,6 +8,7 @@ import { Button } from './UI/Buttons/Buttons';
 
 import paragrathStyle from '../src/UI/Paragrath/Paragrath.module.css'
 import buttonStyle from '../src/UI/Buttons/Buttons.module.css'
+import { Theme } from './components/Theme';
 
 function App() {
     
@@ -27,7 +28,6 @@ function App() {
 
     const [isModalHidden, setModalHidden] = useState(false);
     
-
     const createNewTask = (newTask) => {
         
         setTasks([...tasks, newTask])
@@ -58,7 +58,13 @@ function App() {
     return (
         <div className="App">
     
-            <header><h1>TodoList</h1></header>
+            <header>
+
+                <h1>TodoList</h1>
+
+                <Theme/>
+            
+            </header>
 
             <main>
 
