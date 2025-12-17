@@ -2,7 +2,7 @@
 
     text-align: center;
 
-    width:  clamp(15vw, 20vw, 50vw);
+    width:  clamp(245px, 20vw, 50vw);
     height: clamp(10px, 35px, 70px);
 
     margin: 10px 0;

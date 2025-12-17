@@ -53,7 +53,7 @@ main {
     justify-content: center;
     gap: 20px;
 
-    width: clamp(10vw, 35vw, 50vw);
+    width: clamp(245px, 70vw, 1920px);
     height: 100%;
 
     margin: 20px auto 0 auto;
@@ -64,13 +64,14 @@ main {
 
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     gap: 40px;
 
-    width: clamp(15vw, 20vw, 50vw);
+    width: clamp(245px, 70vw, 90vw);
     height: 450px;
-    text-align: center;
 
+    text-align: center;
     margin: 0 auto;
 
 }
@@ -93,16 +94,30 @@ main {
     background-color: #4e5ab294;
 
     border: 3px solid #5c5e7a;
-    border-right: none;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 30px;
     
+
+}
+
+@media (max-width:300px) {
+    
+    .tasks_column {
+
+        width: 100%;
+
+    }
+
+    .task {
+
+        width: 85vw;
+
+    }
 
 }
 
 .input_block {
 
-    width: clamp(15vw, 20vw, 50vw);
+    width: clamp(245px, 20vw, 50vw);
     height: 200px;
 
 }

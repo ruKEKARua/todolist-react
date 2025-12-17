@@ -14,14 +14,17 @@ function App() {
     
     Object.keys(localStorage).forEach((element) => {
 
-        const titleAndBodySplit = localStorage[element].split(',')
-        
-        localStorageArray.push({id: element, title: titleAndBodySplit[0], body: titleAndBodySplit[1]});
+        const storageSplit = localStorage[element].split(',')
+
+        const title = storageSplit.shift();
+
+        localStorageArray.push({id: element, title: title, body: storageSplit.join()});
 
     });
 
     const [tasks, setTasks] = useState(localStorageArray)
     
+
     const createNewTask = (newTask) => {
         
         setTasks([...tasks, newTask])
