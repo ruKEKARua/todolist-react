@@ -14,6 +14,7 @@
 
 .InputBody {
 
+    text-align: justify;
     height: clamp(50px, 130px, 170px);
 
 }

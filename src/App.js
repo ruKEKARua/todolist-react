@@ -38,7 +38,6 @@ function App() {
 
     const removeTask = (task) => {
 
-        
         setTasks(tasks.filter(p => p.id !== task.id))
         localStorage.removeItem(task.id)
 
