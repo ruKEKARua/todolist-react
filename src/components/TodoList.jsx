@@ -8,10 +8,11 @@ export const TodoList = ({taskList, removeTask}) =>{
         
         <div className='tasks_column'>
         
+
             {taskList.map((todo) => 
 
-                <Task title={todo.title} body={todo.body} key={todo.id} task={todo} removeTask={removeTask}/> 
-            
+                <Task title={todo.title} body={todo.body} key={todo.id} id={todo.id} task={todo} removeTask={removeTask}/> 
+
             )}
         
         </div>

@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/App.css';
 
 import { TodoList } from './components/TodoList';
 import { Modal } from './components/Modal';
-import { Paragrath } from './UI/Paragrath/Paragrath';
 import { Button } from './UI/Buttons/Buttons';
 
-import paragrathStyle from '../src/UI/Paragrath/Paragrath.module.css'
 import buttonStyle from '../src/UI/Buttons/Buttons.module.css'
 import { Theme } from './components/Theme';
+import axios from 'axios';
+import { Loading } from './components/Loading';
 
 function App() {
     
-    const localStorageArray = []
+    let localStorageArray = []
     
     Object.keys(localStorage).forEach((element) => {
 
@@ -27,6 +27,8 @@ function App() {
     const [tasks, setTasks] = useState(localStorageArray);
 
     const [isModalHidden, setModalHidden] = useState(false);
+
+    const [isLoading, setLoading] = useState(false);
     
     const createNewTask = (newTask) => {
         
@@ -54,6 +56,40 @@ function App() {
         setModalHidden(!isModalHidden);
 
     }
+    
+    useEffect(() => {
+
+       fetchPosts()
+
+    }, [])
+    
+    const fetchPosts = () => {
+
+        setLoading(true)
+        
+        setTimeout(() => {
+            
+            axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(response => {
+            
+                setTasks(response.data)
+            
+            })
+            .catch(error => {
+              console.error('Failed to fetch posts:', error)
+            })
+    
+            setLoading(false)
+            
+        }, 2500);
+
+
+
+    }
+
+
+
+
 
     return (
         <div className="App">
@@ -67,14 +103,21 @@ function App() {
             </header>
 
             <main>
+                
 
                 <Button title={'Add New Task'} className={buttonStyle.ButtonNewTask} func={modalOpen}/>
 
+
                 <Modal createNewTask={createNewTask} className={`${'modal'} ${isModalHidden ? '' : 'hidden'}`} closeModal={closeModal}/>
 
-                {localStorageArray.length == 0 ? <Paragrath title={'List is Empty'} className={paragrathStyle.empty} /> : <TodoList taskList={tasks} removeTask={removeTask} />}
+                {
 
-
+                    isLoading 
+                    ?
+                    <Loading />:  
+                    <TodoList taskList={tasks} removeTask={removeTask} />
+                    /*localStorageArray.length == 0 ? <Paragrath title={'List is Empty'} className={paragrathStyle.empty} /> : <TodoList taskList={tasks} removeTask={removeTask} />*/
+                }
 
             </main>
 

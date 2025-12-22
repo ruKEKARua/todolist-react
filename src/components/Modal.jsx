@@ -16,7 +16,7 @@ export const Modal = ({createNewTask, className, closeModal}) =>{
 
             <div className={className}>
                 
-                <Inputs createNewTask={createNewTask}/>
+                <Inputs createNewTask={createNewTask} closeModal={closeModal}/>
 
                 <Button func={closeModal} title={'X'} className={buttonStyle.closeModal}/>
 

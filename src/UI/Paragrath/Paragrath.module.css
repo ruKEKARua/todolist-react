@@ -6,9 +6,14 @@
 
 }
 
-.body {
+.title {
 
     color: #edbe2c;
+
+}
+
+.body {
+
     text-align: justify;
 
 }
@@ -36,3 +41,11 @@
     text-align: center;
 
 }
+
+.loading {
+
+    margin: 0 auto;
+    margin-top: 20px;
+
+}
+

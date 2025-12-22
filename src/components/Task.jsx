@@ -5,7 +5,7 @@ import { Button } from '../UI/Buttons/Buttons'
 import paragrathStyle from '../UI/Paragrath/Paragrath.module.css'
 import buttonStyle from '../UI/Buttons/Buttons.module.css'
 
-export const Task = ({title, body, task, removeTask}) =>{
+export const Task = ({title, body, task, removeTask, id}) =>{
 
     const deleteTask = () => {
 

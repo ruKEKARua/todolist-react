@@ -141,7 +141,7 @@ main {
     height: 100%;
 
 
-    background-color: rgba(41, 41, 41, 0.7);
+    background-color: rgba(41, 41, 41, 0.9);
 
 }
 
@@ -182,3 +182,32 @@ main {
 
 }
 
+
+.loading_block {
+
+    width: 50px;
+    height: 50px;
+
+    outline-color: #ff000085;
+    outline-width: 8px;
+    outline-style: dashed;
+    border-radius: 50%;
+
+    margin: 0 auto;
+
+    animation: rotate 2.5s infinite alternate;
+
+}
+
+
+
+@keyframes rotate {
+    
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+    to {
+        transform: rotate(720deg) scale(2.5);
+    }
+
+}
