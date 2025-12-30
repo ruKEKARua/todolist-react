@@ -84,14 +84,9 @@ main {
     display: inline-block;
 
     width: 100%;
-    height: 150px;
+    height: 250px;
 
-    overflow: scroll;
-    overflow-x: hidden;
-
-    scrollbar-width: thin;
-
-    padding: 10px;
+    padding: 20px;
     margin: 0 auto;
 
     background-color: #4e5ab294;
@@ -99,6 +94,16 @@ main {
     border: 3px solid #5c5e7a;
     border-radius: 30px;
     
+
+}
+
+.task_main_block {
+
+    height: 90%;
+
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
 
 }
 
@@ -211,3 +216,18 @@ main {
     }
 
 }
+
+.delete_button_block {
+
+    display: flex;
+    justify-content: right;
+
+    width: 90%;
+
+    margin: 0 auto 0 auto;
+    padding-bottom: 10px;
+
+    border-bottom: 3px solid #f7c2ff85;
+
+}
+
