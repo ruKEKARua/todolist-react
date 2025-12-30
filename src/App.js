@@ -9,6 +9,8 @@ import buttonStyle from '../src/UI/Buttons/Buttons.module.css'
 import { Theme } from './components/Theme';
 import axios from 'axios';
 import { Loading } from './components/Loading';
+import PostService from './hooks/PostService';
+import { useFecthing } from './hooks/useFetching';
 
 function App() {
     
@@ -28,7 +30,13 @@ function App() {
 
     const [isModalHidden, setModalHidden] = useState(false);
 
-    const [isLoading, setLoading] = useState(false);
+    const [fetchPosts, isPostLoading, postError] = useFecthing(async () => {
+
+        const jsonData = await PostService.getAll();
+            
+        setTasks(jsonData) 
+
+    })
     
     const createNewTask = (newTask) => {
         
@@ -62,33 +70,6 @@ function App() {
        fetchPosts()
 
     }, [])
-    
-    const fetchPosts = () => {
-
-        setLoading(true)
-        
-        setTimeout(() => {
-            
-            axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(response => {
-            
-                setTasks(response.data)
-            
-            })
-            .catch(error => {
-              console.error('Failed to fetch posts:', error)
-            })
-    
-            setLoading(false)
-            
-        }, 2500);
-
-
-
-    }
-
-
-
 
 
     return (
@@ -112,7 +93,7 @@ function App() {
 
                 {
 
-                    isLoading 
+                    isPostLoading 
                     ?
                     <Loading />:  
                     <TodoList taskList={tasks} removeTask={removeTask} />
