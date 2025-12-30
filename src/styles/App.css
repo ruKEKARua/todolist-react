@@ -49,6 +49,26 @@ main {
 
 }
 
+nav {
+
+    display: flex;
+    justify-content: right;
+
+    gap: 10px;
+
+    font-size: 1.3rem;
+
+    margin: 20px;
+
+}
+
+a {
+
+    color: aqua;
+    text-decoration: none;
+
+}
+
 .tasks_column {
 
     display: flex;

@@ -1,109 +1,36 @@
-import React, { useEffect, useState } from 'react';
 import './styles/App.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-import { TodoList } from './components/TodoList';
-import { Modal } from './components/Modal';
-import { Button } from './UI/Buttons/Buttons';
-
-import buttonStyle from '../src/UI/Buttons/Buttons.module.css'
-import { Theme } from './components/Theme';
-import axios from 'axios';
-import { Loading } from './components/Loading';
-import PostService from './hooks/PostService';
-import { useFecthing } from './hooks/useFetching';
+import { About } from './pages/About';
+import Posts from './pages/Posts';
+import { SwitchTransition } from 'react-transition-group';
 
 function App() {
     
-    let localStorageArray = []
-    
-    Object.keys(localStorage).forEach((element) => {
-
-        const storageSplit = localStorage[element].split(',')
-
-        const title = storageSplit.shift();
-
-        localStorageArray.push({id: element, title: title, body: storageSplit.join()});
-
-    });
-
-    const [tasks, setTasks] = useState(localStorageArray);
-
-    const [isModalHidden, setModalHidden] = useState(false);
-
-    const [fetchPosts, isPostLoading, postError] = useFecthing(async () => {
-
-        const jsonData = await PostService.getAll();
-            
-        setTasks(jsonData) 
-
-    })
-    
-    const createNewTask = (newTask) => {
-        
-        setTasks([...tasks, newTask])
-
-        localStorage.setItem(newTask.id, [newTask.title, newTask.body])
-        
-    }
-
-    const removeTask = (task) => {
-
-        setTasks(tasks.filter(p => p.id !== task.id))
-        localStorage.removeItem(task.id)
-
-    }
-
-    const modalOpen = () => {
-
-        setModalHidden(!isModalHidden);
-
-    }
-
-    const closeModal = () => {
-
-        setModalHidden(!isModalHidden);
-
-    }
-    
-    useEffect(() => {
-
-       fetchPosts()
-
-    }, [])
-
-
     return (
-        <div className="App">
-    
-            <header>
 
-                <h1>TodoList</h1>
+        <BrowserRouter>
 
-                <Theme/>
-            
-            </header>
+            <nav>
 
-            <main>
+                <Link to="/about">О сайте</Link> |
+                <Link to="/posts">Задачи</Link>
+            </nav>
+
+            <Routes>
+
+                <Route path="/about" element={<About />} />
+                <Route path="/posts" element={<Posts />} />
                 
+                <Route
+                    path="*"
+                    element={<Posts to="/posts" replace />}
+                />
+                
+            </Routes>
+        </BrowserRouter>
 
-                <Button title={'Add New Task'} className={buttonStyle.ButtonNewTask} func={modalOpen}/>
-
-
-                <Modal createNewTask={createNewTask} className={`${'modal'} ${isModalHidden ? '' : 'hidden'}`} closeModal={closeModal}/>
-
-                {
-
-                    isPostLoading 
-                    ?
-                    <Loading />:  
-                    <TodoList taskList={tasks} removeTask={removeTask} />
-                    /*localStorageArray.length == 0 ? <Paragrath title={'List is Empty'} className={paragrathStyle.empty} /> : <TodoList taskList={tasks} removeTask={removeTask} />*/
-                }
-
-            </main>
-
-        </div>
-    );
+    )
 }
 
 export default App;
