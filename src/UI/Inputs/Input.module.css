@@ -1,12 +1,16 @@
-.InputTitle, .InputBody {
+.InputTitle, .InputBody, .change_title, .change_body {
 
     text-align: center;
 
     width:  clamp(245px, 20vw, 50vw);
     height: clamp(10px, 35px, 70px);
 
+    font-size: large;
+
+    color: white;
+
     margin: 10px 0;
-    background-color: #f3ffb5;
+    background-color: #6073ff8c;
     border-radius: 25px;
     border: none;
 
@@ -16,5 +20,20 @@
 
     text-align: justify;
     height: clamp(50px, 130px, 170px);
+
+    padding: 10px;
+
+}
+
+.change_title, .change_body {
+
+    width: clamp(200px, 30vw, 50vw);
+
+}
+
+.change_body {
+
+    height: 100px;
+    text-align: center;
 
 }

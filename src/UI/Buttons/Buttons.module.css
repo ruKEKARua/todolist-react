@@ -1,6 +1,6 @@
 .ButtonNewTask {
 
-    width: 245px;
+    width: clamp(170px, 70%, 245px);
     height: 30px;
 
     background-color: rgb(255 167 2 / 69%);
@@ -10,7 +10,9 @@
 
     margin: 0 auto;
 
+
 }
+
 .ButtonNewTask:hover {
 
     background-color: rgba(255, 166, 2, 0.966);
@@ -26,23 +28,25 @@
     width: clamp(30px, 2vw, 100px);
     height: clamp(30px, 2vw, 100px);
 
-    font-size: clamp(20px, 1.6vw, 100px);
+    font-size: clamp(20px, 1.4vw, 100px);
     text-align: center;
     color: rgb(255, 255, 255);
 
     background-color: #c04b4bbe;
-    border-radius: 100%;
+    
     border: none;
+    border-radius: 100%;
 
     cursor: pointer;
 
     margin: 0 auto;
 
     position: absolute;
-    top: 15%;
-    right: clamp(10vw, 25vw, 25vw);
+    top: clamp(20px, 15%, 15%);
+    right: clamp(10vw, 20vw, 25vw);
 
 }
+
 .closeModal:hover {
 
     background-color: #c04b4b;
@@ -83,7 +87,20 @@
 
 }
 
-.ButtonDelete, .ButtonDelete:hover, .ButtonAdd, .ButtonAdd:hover, .ButtonNewTask, .ButtonNewTask:hover, .closeModal, .closeModal:hover {
+.ButtonChange {
+
+    background-color: #e7be00b0;
+    border: none;
+
+}
+
+.ButtonChange:hover {
+
+    background-color: #e7be00;
+
+}
+
+.ButtonDelete, .ButtonDelete:hover, .ButtonAdd, .ButtonAdd:hover, .ButtonNewTask, .ButtonNewTask:hover, .closeModal, .closeModal:hover, .ButtonChange, .ButtonChange:hover {
 
     transition: 0.24s;
     border-radius: 20px;
@@ -94,8 +111,11 @@
 
 .page, .page_current {
 
-    width: 50px;
-    height: 50px;
+    width: clamp(35px, 3vw, 200px);
+    height: clamp(35px, 3vw, 200px);
+
+    font-size: 1rem;
+    text-align: center;
 
     background-color: #ffb700c2;
 

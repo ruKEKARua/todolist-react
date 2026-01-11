@@ -7,54 +7,38 @@ import { Button } from '../UI/Buttons/Buttons';
 import buttonStyle from '../UI/Buttons/Buttons.module.css'
 import { Theme } from '../components/Theme';
 import { Loading } from '../components/Loading';
-import PostService from '../hooks/PostService';
-import { useFecthing } from '../hooks/useFetching';
-import { getPagesArray, getPagesCount } from '../utils/pages';
+
+import { Pagitanion } from '../components/Pagination';
 
 function Posts() {
     
     let localStorageArray = []
     
-    Object.keys(localStorage).forEach((element) => {
-
-        const storageSplit = localStorage[element].split(',')
-
-        const title = storageSplit.shift();
-
-        localStorageArray.push({id: element, title: title, body: storageSplit.join()});
-
-    });
-
+    
     const [tasks, setTasks] = useState(localStorageArray);
-
     const [isModalHidden, setModalHidden] = useState(false);
     
-    const [totalPages, setTotalPages] = useState(0);
-    const [limit, setLimit] = useState(10);
-    const [page, setPage] = useState(1);
-    
-    let pagesArray = getPagesArray(totalPages);
-    
-    const [fetchPosts, isPostLoading, postError] = useFecthing(async () => {
-        
-        const jsonData = await PostService.getAll(limit, page);
-        
-        setTasks(jsonData.data)
-        
-        const totalCount = jsonData.headers['x-total-count'];
-        
-        
-        setTotalPages(getPagesCount(totalCount, limit))
-        
-    })
+    Object.keys(localStorage).forEach((element) => {
 
-    
+        const id = element;
+        const parse = JSON.parse(localStorage[element]);
+        const title = parse.title;
+        const body = parse.body;
+
+        const newTask = {id: id, title: title, body: body}
+
+        localStorageArray.push({id: id, title: title, body:body})
+
+
+    });
     
     const createNewTask = (newTask) => {
         
         setTasks([...tasks, newTask])
 
-        localStorage.setItem(newTask.id, [newTask.title, newTask.body])
+        const id = newTask.id;
+
+        localStorage.setItem(id, JSON.stringify(newTask))
         
     }
 
@@ -63,6 +47,12 @@ function Posts() {
         setTasks(tasks.filter(p => p.id !== task.id))
         localStorage.removeItem(task.id)
 
+    }
+
+    const updateTask = (updatedTask) => {
+        setTasks(tasks.map(task => 
+            task.id === updatedTask.id ? updatedTask : task
+        ));
     }
 
     const modalOpen = () => {
@@ -76,12 +66,7 @@ function Posts() {
         setModalHidden(!isModalHidden);
 
     }
-    
-    useEffect(() => {
 
-       fetchPosts()
-
-    }, [page])
 
     return (
         <div className="App">
@@ -91,41 +76,35 @@ function Posts() {
                 <h1>TodoList</h1>
 
                 <Theme/>
-            
+
+                <div className='new_task_wrapper'>
+                
+                    <Button 
+
+                        title={'Add New Task'} 
+                        className={buttonStyle.ButtonNewTask} 
+                        func={modalOpen}/>
+                
+                </div>
+
             </header>
 
             <main>
                 
 
-                <Button title={'Add New Task'} className={buttonStyle.ButtonNewTask} func={modalOpen}/>
+                <Modal 
 
-                <div style={{display: 'flex', justifyContent: 'center', gap: '20px', width: '100%', height: '50px', margin: '30px auto 0 auto'}}>
+                    createNewTask={createNewTask} 
+                    className={`${'modal'} ${isModalHidden ? '' : 'hidden'}`} 
+                    closeModal={closeModal}/>
 
-                    {
-                        pagesArray.map((element) => {
-                        
-                            return <Button title={element} func={() => setPage(element)} className={ page === element ? `${buttonStyle.page_current} ${buttonStyle.page}` : `${buttonStyle.page}`} key={element}/>
-                        
-                        })
-                    }
+                <TodoList 
 
-                </div> 
-                
-
-                <Modal createNewTask={createNewTask} className={`${'modal'} ${isModalHidden ? '' : 'hidden'}`} closeModal={closeModal}/>
-
-                {
-                    postError && <h1>Произошла ошибка ${postError}</h1>
-                }
-
-                {
-
-                    isPostLoading 
-                    ?
-                    <Loading />:  
-                    <TodoList taskList={tasks} removeTask={removeTask} />
-                    /*localStorageArray.length == 0 ? <Paragrath title={'List is Empty'} className={paragrathStyle.empty} /> : <TodoList taskList={tasks} removeTask={removeTask} />*/
-                }
+                    taskList={tasks} 
+                    removeTask={removeTask} 
+                    createNewTask={createNewTask}
+                    updateTask={updateTask}
+                   />
 
             </main>
 
