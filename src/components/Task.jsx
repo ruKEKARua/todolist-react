@@ -5,11 +5,15 @@ import { Textarea } from '../UI/Textareas/Textarea'
 
 import paragrathStyle from '../UI/Paragrath/Paragrath.module.css'
 import buttonStyle from '../UI/Buttons/Buttons.module.css'
-import textareaStyle from '../UI/Textareas/Textarea.module.css'
 import inputsStyle from '../UI/Inputs/Input.module.css'
 
+import { filter, updateTaskDispatch } from '../store/localstorageSlicer';
+import { useDispatch } from 'react-redux'
 
-export const Task = ({title, body, task, removeTask, id, updateTask}) =>{
+
+export const Task = ({title, body, task, id, isFinish}) =>{
+
+    const dispatch = useDispatch()
 
     const [titleElement, setTitleElement] = useState('Paragrath');
     const [bodyElement, setBodyElement] = useState('Paragrath');
@@ -18,6 +22,8 @@ export const Task = ({title, body, task, removeTask, id, updateTask}) =>{
 
     const [titleArea, setTitleArea] = useState(title);
     const [bodyArea, setBodyArea] = useState(body);
+
+
 
     const test = () => {
 
@@ -31,20 +37,17 @@ export const Task = ({title, body, task, removeTask, id, updateTask}) =>{
     const test2 = () => {
 
         const updatedTask = {
-                id: id, // тот же ID
+                id: id,
                 title: titleArea,
-                body: bodyArea
+                body: bodyArea,
+                isFinish: isFinish
             };
-        
-        // Вместо удаления и создания новой задачи - обновите существующую
-        // Удалите старую запись из localStorage
+
         localStorage.removeItem(id);
         
-        // Добавьте обновленную запись
-        localStorage.setItem(updatedTask.id, [updatedTask.title, updatedTask.body]);
-        
-        // Вызовите функцию обновления задачи в родительском компоненте
-        updateTask(updatedTask);
+        localStorage.setItem(updatedTask.id, JSON.stringify(updatedTask));
+       
+        dispatch(updateTaskDispatch(updatedTask));
         
         setTitleElement('Paragrath')
         setBodyElement('Paragrath')
@@ -53,28 +56,29 @@ export const Task = ({title, body, task, removeTask, id, updateTask}) =>{
         
     }
 
-    const deleteTask = () => {
+    const removeTask = () => {
 
-        removeTask(task)
+        dispatch(filter(task))
+        localStorage.removeItem(task.id)
 
     }
-
 
     return (
         
         <div className='task' key={id}>
 
-            <div className='delete_button_block'> 
+            <div className='buttons_block'> 
 
                 {
-                    updateTask === 'zero' ? <></> : (
+                    true === 'zero' ? <></> : (
                         buttonName === 'Change' ? <Button title={'Change'} className={buttonStyle.ButtonChange} func={test} /> 
                         : <Button title={'Confirm'} className={buttonStyle.ButtonChange} func={test2} />
                     )
                 }
-
                 
-                <Button title={'Delete'} className={buttonStyle.ButtonDelete} func={deleteTask} />
+                <Paragrath title={`${isFinish ? 'Выполнена' : 'Не выполнена'}`} className={'checkBox'}></Paragrath>
+                
+                <Button title={'Delete'} className={buttonStyle.ButtonDelete} func={removeTask} />
 
             </div>
 

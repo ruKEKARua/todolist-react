@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { setThemeMoon, setThemeSun } from '../store/themeSlice';
 
 export const Theme = () =>{
-    
-    const [theme, setTheme] = useState('theme_sun');
+
+    const dispatch = useDispatch()
+
+    const theme = useSelector((state) => state.theme.value);
     
     useEffect(() => {
 
@@ -22,7 +26,7 @@ export const Theme = () =>{
 
     const changeTheme = () => {
         
-        theme == 'theme_sun' ? setTheme('theme_moon') : setTheme('theme_sun');
+        theme == 'theme_sun' ? dispatch(setThemeMoon()) : dispatch(setThemeSun());
         
     }
 

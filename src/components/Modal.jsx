@@ -5,10 +5,20 @@ import { Inputs } from './Inputs';
 import { Button } from '../UI/Buttons/Buttons';
 
 import buttonStyle from '../UI/Buttons/Buttons.module.css'
+import { useDispatch } from 'react-redux';
+import { setModalHidden } from '../store/modalSlice';
 
-export const Modal = ({createNewTask, className, closeModal}) =>{
+export const Modal = ({className}) =>{
+
+    const dispatch = useDispatch()
 
     const Fade = styled.div`animation: 0.25s ${keyframes`${fadeIn}`}`;
+
+    const closeModal = () => {
+
+        dispatch(setModalHidden());
+
+    }
 
     return (
         
@@ -16,7 +26,7 @@ export const Modal = ({createNewTask, className, closeModal}) =>{
 
             <div className={className}>
                 
-                <Inputs createNewTask={createNewTask} closeModal={closeModal}/>
+                <Inputs />
 
                 <Button func={closeModal} title={'X'} className={buttonStyle.closeModal}/>
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Task } from './Task';
 
-export const TodoList = ({taskList, removeTask, updateTask }) =>{
+export const TodoList = ({taskList}) =>{
 
     return (
         
@@ -16,9 +16,8 @@ export const TodoList = ({taskList, removeTask, updateTask }) =>{
                     body={todo.body} 
                     key={todo.id} 
                     id={todo.id} 
-                    task={todo} 
-                    removeTask={removeTask} 
-                    updateTask={updateTask}    
+                    task={todo}
+                    isFinish={todo.isFinish}
                 /> 
 
             )}

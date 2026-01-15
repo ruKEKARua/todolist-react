@@ -1,8 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit';
-import todoReducer from './todoStore';
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from './counterSlice'
+import nameReducer  from './testSlice'
+import localstorageSlice from './localstorageSlicer'
+import modalSlice from './modalSlice'
+import themeSlice  from './themeSlice'
 
-export const store = configureStore({
+export default configureStore({
   reducer: {
-    todos: todoReducer,
-  },
-});
+    counter: counterReducer,
+    name: nameReducer,
+    listStorage: localstorageSlice,
+    modal: modalSlice,
+    theme: themeSlice
+  }
+})

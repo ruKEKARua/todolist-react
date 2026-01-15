@@ -8,10 +8,16 @@ import inputsStyle from '../UI/Inputs/Input.module.css'
 import { Textarea } from '../UI/Textareas/Textarea'
 import textareaStyle from '../UI/Textareas/Textarea.module.css'
 
+import { drawTask } from '../store/localstorageSlicer';
+import { useDispatch } from 'react-redux'
+import { setModalHidden } from '../store/modalSlice'
 
-export const Inputs = ({createNewTask, closeModal}) =>{
 
-    const [todo, setTodo] = useState({title: '', body: ''});
+export const Inputs = () =>{
+
+    const dispatch = useDispatch()
+
+    const [todo, setTodo] = useState({title: '', body: '', isFinish: false});
     
     let [titleIsActive, titleSetIsActive] = useState(false);
     let [bodyIsActive, bodySetIsActive] = useState(false);
@@ -65,6 +71,22 @@ export const Inputs = ({createNewTask, closeModal}) =>{
         createNewTask(newTask);
         setTodo({title: '', body: ''});
         closeModal();
+
+    }
+
+    const createNewTask = (newTask) => {
+        
+        dispatch(drawTask(newTask))
+        
+        const id = newTask.id;
+        
+        localStorage.setItem(id, JSON.stringify(newTask))
+        
+    }
+
+    const closeModal = () => {
+
+        dispatch(setModalHidden());
 
     }
 

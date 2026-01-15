@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { TodoList } from '../components/TodoList';
 import { Modal } from '../components/Modal';
@@ -6,66 +6,53 @@ import { Button } from '../UI/Buttons/Buttons';
 
 import buttonStyle from '../UI/Buttons/Buttons.module.css'
 import { Theme } from '../components/Theme';
-import { Loading } from '../components/Loading';
 
-import { Pagitanion } from '../components/Pagination';
+import { useSelector, useDispatch } from 'react-redux'
+import { drawTask } from '../store/localstorageSlicer';
+import { setModalHidden } from '../store/modalSlice';
+
 
 function Posts() {
     
-    let localStorageArray = []
+    const localstorageTasks = useSelector((state) => state.listStorage.value);
+    const isModalHidden = useSelector((state) => state.modal.value);
     
+    const dispatch = useDispatch()
     
-    const [tasks, setTasks] = useState(localStorageArray);
-    const [isModalHidden, setModalHidden] = useState(false);
+    const hasRun = useRef(false);
+
+    useEffect(() => {
+
+        if (!hasRun.current) {
+            hasRun.current = true;
+            Object.keys(localStorage).forEach((element) => {
     
-    Object.keys(localStorage).forEach((element) => {
-
-        const id = element;
-        const parse = JSON.parse(localStorage[element]);
-        const title = parse.title;
-        const body = parse.body;
-
-        const newTask = {id: id, title: title, body: body}
-
-        localStorageArray.push({id: id, title: title, body:body})
-
-
-    });
-    
-    const createNewTask = (newTask) => {
+                const id = element;
+                const parse = JSON.parse(localStorage[element]);
+                const title = parse.title;
+                const body = parse.body;
+                const isFinish = parse.isFinish;
+                
+                dispatch(
+                    drawTask(
+                        {id: id, 
+                        title: title, 
+                        body:body, 
+                        isFinish: isFinish}))
+                    
+                    
+                });
         
-        setTasks([...tasks, newTask])
-
-        const id = newTask.id;
-
-        localStorage.setItem(id, JSON.stringify(newTask))
+        }
         
-    }
-
-    const removeTask = (task) => {
-
-        setTasks(tasks.filter(p => p.id !== task.id))
-        localStorage.removeItem(task.id)
-
-    }
-
-    const updateTask = (updatedTask) => {
-        setTasks(tasks.map(task => 
-            task.id === updatedTask.id ? updatedTask : task
-        ));
-    }
+    }, [localstorageTasks])
 
     const modalOpen = () => {
 
-        setModalHidden(!isModalHidden);
+        dispatch(setModalHidden());
 
     }
 
-    const closeModal = () => {
-
-        setModalHidden(!isModalHidden);
-
-    }
 
 
     return (
@@ -84,7 +71,7 @@ function Posts() {
                         title={'Add New Task'} 
                         className={buttonStyle.ButtonNewTask} 
                         func={modalOpen}/>
-                
+
                 </div>
 
             </header>
@@ -94,16 +81,12 @@ function Posts() {
 
                 <Modal 
 
-                    createNewTask={createNewTask} 
-                    className={`${'modal'} ${isModalHidden ? '' : 'hidden'}`} 
-                    closeModal={closeModal}/>
+                    className={`${'modal'} ${isModalHidden ? '' : 'hidden'}`} />
 
                 <TodoList 
 
-                    taskList={tasks} 
-                    removeTask={removeTask} 
-                    createNewTask={createNewTask}
-                    updateTask={updateTask}
+                    taskList={localstorageTasks} 
+
                    />
 
             </main>
