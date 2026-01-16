@@ -231,13 +231,20 @@ a {
 
 .theme_sun {
 
-    background-image: url('/src/UI/img/theme/sun.png');
+    background-image: url('/src/UI/Images/theme/sun.png');
 
 }
 
 .theme_moon {
 
-    background-image: url('/src/UI/img/theme/moon.svg');
+    background-image: url('/src/UI/Images/theme/moon.svg');
+
+}
+
+img {
+
+    width: 25px;
+    height: 25px;
 
 }
 
@@ -304,6 +311,24 @@ a {
     justify-content: center; 
     flex-wrap: wrap;
     gap: 20px;
+
+}
+
+.checkbox_wrapper {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 10px;
+
+}
+
+.finish_title {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 

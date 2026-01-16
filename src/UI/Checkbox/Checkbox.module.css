@@ -1,0 +1,21 @@
+.checkbox {
+
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    border: none;
+
+}
+
+.checkbox:checked {
+
+    background-color: rgba(0, 255, 85, 0.753);
+
+}

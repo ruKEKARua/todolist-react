@@ -9,6 +9,10 @@ import inputsStyle from '../UI/Inputs/Input.module.css'
 
 import { filter, updateTaskDispatch } from '../store/localstorageSlicer';
 import { useDispatch } from 'react-redux'
+import Checkbox from '../UI/Checkbox/Checkbox'
+import Img from '../UI/Img/Img'
+
+import goodImage from '../UI/Images/good.png'
 
 
 export const Task = ({title, body, task, id, isFinish}) =>{
@@ -23,7 +27,7 @@ export const Task = ({title, body, task, id, isFinish}) =>{
     const [titleArea, setTitleArea] = useState(title);
     const [bodyArea, setBodyArea] = useState(body);
 
-
+    const [isFinishState, setIsFinish] = useState(isFinish);
 
     const test = () => {
 
@@ -40,7 +44,7 @@ export const Task = ({title, body, task, id, isFinish}) =>{
                 id: id,
                 title: titleArea,
                 body: bodyArea,
-                isFinish: isFinish
+                isFinish: isFinishState
             };
 
         localStorage.removeItem(id);
@@ -63,6 +67,12 @@ export const Task = ({title, body, task, id, isFinish}) =>{
 
     }
 
+    const changeIsFinished = () => {
+
+        setIsFinish(!isFinishState)
+
+    }
+
     return (
         
         <div className='task' key={id}>
@@ -70,13 +80,34 @@ export const Task = ({title, body, task, id, isFinish}) =>{
             <div className='buttons_block'> 
 
                 {
-                    true === 'zero' ? <></> : (
-                        buttonName === 'Change' ? <Button title={'Change'} className={buttonStyle.ButtonChange} func={test} /> 
-                        : <Button title={'Confirm'} className={buttonStyle.ButtonChange} func={test2} />
-                    )
+                    buttonName === 'Change' ? <Button title={'Change'} className={buttonStyle.ButtonChange} func={test} /> 
+                    : <Button title={'Confirm'} className={buttonStyle.ButtonChange} func={test2} />
+                }
+
+
+                {
+
+                    buttonName === 'Change' ? 
+                        <div className='checkbox_wrapper'>
+                            <div className='finish_title'>
+                                <Paragrath title={`${isFinishState ? 'Выполнена' : 'Не выполнена'}`} className={'checkBox'}/>
+                            </div>
+                            {isFinishState ? <Img path={goodImage} alt={'фото не выолненной задачи'}/> : <></>}
+
+                        </div>
+                    :
+                        <div className='checkbox_wrapper'>
+                            <Checkbox checked={isFinishState} onChange={changeIsFinished} />
+                            <div className='finish_title'>
+                                <Paragrath title={`${isFinishState ? 'Выполнена' : 'Не выполнена'}`} className={'checkBox'}/>
+                            </div>
+                            {isFinishState ? <Img path={goodImage} alt={'фото не выолненной задачи'}/> : <></>}
+                        </div>
+                        
+
                 }
                 
-                <Paragrath title={`${isFinish ? 'Выполнена' : 'Не выполнена'}`} className={'checkBox'}></Paragrath>
+                
                 
                 <Button title={'Delete'} className={buttonStyle.ButtonDelete} func={removeTask} />
 
